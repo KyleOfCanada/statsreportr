@@ -51,12 +51,8 @@ report_t <- function(ttest, effect = 1, digits = 3, cohensd = NULL, cohens_magni
       stop("The cohens d input must be an rstatix::cohens_d object")
     }
 
-    if (!all(cohensd$.y. == ttest$.y.) & !all(cohensd$group1 == ttest$group1) & !all(cohensd$group2 == ttest$group2)) {
+    if (!(all(cohensd$.y. == ttest$.y.) & all(cohensd$group1 == ttest$group1) & all(cohensd$group2 == ttest$group2))) {
       stop("The cohens_d must analyze the same effects as the t_test")
-    }
-
-    if (!("cohens_d" %in% attributes(cohensd)$class)) {
-      stop("The cohens_d input must be an rstatix::cohens_d object")
     }
 
     if (!is.logical(cohens_magnitude)) {

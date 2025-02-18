@@ -1,4 +1,5 @@
 results <- rstatix::anova_test(mtcars, mpg ~ cyl * carb)
+error_results <- aov(mpg ~ cyl * carb, data = mtcars)
 
 test_that("report_anova works", {
   expect_equal(
@@ -27,3 +28,21 @@ test_that("report_anova accepts digits argument", {
     "*F*~(1,28)~ = 1.6 *p* = 0.22, $\\eta^2_G$ = 0.052"
   )
 })
+
+test_that("report_anova throws errors with incorrect input", {
+  expect_error(
+    report_anova(error_results),
+    "The ANOVA input must be an rstatix::anova_test object"
+  )
+
+  expect_error(
+    report_anova(results, effect = "test"),
+    "The effect name is not in the ANOVA table"
+  )
+
+  expect_error(
+    report_anova(results, effect = 100),
+    "The effect number is greater than the number of effects in the ANOVA table"
+  )
+})
+

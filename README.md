@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Codecov test
+coverage](https://codecov.io/gh/KyleOfCanada/statsreportr/graph/badge.svg)](https://app.codecov.io/gh/KyleOfCanada/statsreportr)
 <!-- badges: end -->
 
 The goal of statsreportr is to make it easy to report the results of
