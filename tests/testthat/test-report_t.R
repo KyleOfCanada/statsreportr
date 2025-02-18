@@ -1,9 +1,7 @@
-results <- rstatix::t_test(mtcars, mpg ~ cyl)
-results2 <- rstatix::t_test(mtcars, mpg ~ am)
-cohensd <- rstatix::cohens_d(mtcars, mpg ~ cyl)
-errortest <- t.test(mtcars$mpg ~ mtcars$am)
-
 test_that("report_t works", {
+  results <- rstatix::t_test(mtcars, mpg ~ cyl)
+  results2 <- rstatix::t_test(mtcars, mpg ~ am)
+
   expect_equal(
     report_t(results),
     "*t*~(13)~ = 4.72, adjusted *p* < 0.001"
@@ -16,6 +14,8 @@ test_that("report_t works", {
 })
 
 test_that("report_t accepts numeric effect argument", {
+  results <- rstatix::t_test(mtcars, mpg ~ cyl)
+
   expect_equal(
     report_t(results, 2),
     "*t*~(15)~ = 7.6, adjusted *p* < 0.0001"
@@ -23,6 +23,8 @@ test_that("report_t accepts numeric effect argument", {
 })
 
 test_that("report_t accepts string effect argument", {
+  results <- rstatix::t_test(mtcars, mpg ~ cyl)
+
   expect_equal(
     report_t(results, c("6", "8")),
     "*t*~(18.5)~ = 5.29, adjusted *p* < 0.0001"
@@ -30,6 +32,8 @@ test_that("report_t accepts string effect argument", {
 })
 
 test_that("report_t accepts digits argument", {
+  results <- rstatix::t_test(mtcars, mpg ~ cyl)
+
   expect_equal(
     report_t(results, 2, digits = 1),
     "*t*~(15)~ = 8, adjusted *p* < 0.0001"
@@ -37,6 +41,9 @@ test_that("report_t accepts digits argument", {
 })
 
 test_that("report_t accepts cohens d argument", {
+  results <- rstatix::t_test(mtcars, mpg ~ cyl)
+  cohensd <- rstatix::cohens_d(mtcars, mpg ~ cyl)
+
   expect_equal(
     report_t(results, 2, cohensd = cohensd),
     "*t*~(15)~ = 7.6, adjusted *p* < 0.0001, *d* = 3.15"
@@ -44,6 +51,9 @@ test_that("report_t accepts cohens d argument", {
 })
 
 test_that("report_t accepts cohens d magnitude argument", {
+  results <- rstatix::t_test(mtcars, mpg ~ cyl)
+  cohensd <- rstatix::cohens_d(mtcars, mpg ~ cyl)
+
   expect_equal(
     report_t(results, 2,
       cohensd = cohensd,
@@ -54,6 +64,11 @@ test_that("report_t accepts cohens d magnitude argument", {
 })
 
 test_that("report_t throws errors with incorrect input", {
+  results <- rstatix::t_test(mtcars, mpg ~ cyl)
+  results2 <- rstatix::t_test(mtcars, mpg ~ am)
+  cohensd <- rstatix::cohens_d(mtcars, mpg ~ cyl)
+  errortest <- t.test(mtcars$mpg ~ mtcars$am)
+
   expect_error(
     report_t(errortest),
     "The t test input must be an rstatix::t_test object"
