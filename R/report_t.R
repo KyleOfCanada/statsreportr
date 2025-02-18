@@ -6,7 +6,7 @@
 #' @param cohensd An rstatix::cohens_d object to include the effect size in the report
 #' @param cohens_magnitude A logical indicating if the effect size magnitude should be included in the report
 #'
-#' @returns A string with the formatted t test result for use in line in an R Markdown or Quarto document
+#' @returns A string with the formatted t test result for use inline in an R Markdown or Quarto document
 #' @export
 #'
 #' @examples
