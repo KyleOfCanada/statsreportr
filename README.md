@@ -7,6 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/KyleOfCanada/statsreportr/graph/badge.svg)](https://app.codecov.io/gh/KyleOfCanada/statsreportr)
+[![R-CMD-check](https://github.com/KyleOfCanada/statsreportr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/KyleOfCanada/statsreportr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of statsreportr is to make it easy to report the results of
