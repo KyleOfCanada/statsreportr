@@ -24,7 +24,7 @@ report_t(
 \item{cohens_magnitude}{A logical indicating if the effect size magnitude should be included in the report}
 }
 \value{
-A string with the formatted t test result for use in line in an R Markdown or Quarto document
+A string with the formatted t test result for use inline in an R Markdown or Quarto document
 }
 \description{
 Report a t test result in text
