@@ -1,19 +1,23 @@
 Package: statsreportr
-Title: Report Formated Statistical Test Results In RMarkdown or Quarto Documents
+Title: Report Formated Statistical Tests In Rmd or qmd Documents
 Version: 0.0.0.9000
 Authors@R: 
     person("Kyle", "Roddick", , "kyle.roddick@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-2701-8166"))
-Description: Convenience functions to make reporting the results of rstatix statistical tests in RMarkdown or Quarto documents easy.
+Description: Convenience functions to make reporting the results of 'rstatix'
+    statistical tests in RMarkdown or Quarto documents easy. Intended to be
+    used in the text of the document, and called with inline code.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Suggests: 
+    rstatix (>= 0.7.2),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
-    dplyr,
-    rstatix,
-    stringr
+    dplyr (>= 1.1.4),
+    stringr (>= 1.5.1)
+Depends:
+    R (>= 4.1.0)    
 URL: https://github.com/KyleOfCanada/statsreportr
 BugReports: https://github.com/KyleOfCanada/statsreportr/issues
