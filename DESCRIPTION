@@ -3,7 +3,7 @@ Title: Reports Formated Statistical Test Results In RMarkdown or Quarto Document
 Version: 0.0.0.9000
 Authors@R: 
     person("Kyle", "Roddick", , "kyle.roddick@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-2701-8166"))
-Description: Convenience functions to make reporting the results of statistical tests in RMarkdown or Quarto documents.
+Description: Convenience functions to make reporting the results of rstatix statistical tests in RMarkdown or Quarto documents easy.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

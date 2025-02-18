@@ -2,3 +2,4 @@
 
 export(format_p)
 export(report_anova)
+export(report_t)

@@ -14,7 +14,7 @@ report_anova(ANOVA, effect = 1, digits = 3)
 \item{digits}{The number of digits to round the p value to}
 }
 \value{
-A string with the formatted ANOVA result for use in line in a R Markdown or Quarto document
+A string with the formatted ANOVA result for use in line in an R Markdown or Quarto document
 }
 \description{
 Report an ANOVA result in text

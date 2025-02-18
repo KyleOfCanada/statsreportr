@@ -4,7 +4,7 @@
 #' @param effect The name or row number of the Effect to report
 #' @param digits The number of digits to round the p value to
 #'
-#' @returns A string with the formatted ANOVA result for use in line in a R Markdown or Quarto document
+#' @returns A string with the formatted ANOVA result for use in line in an R Markdown or Quarto document
 #' @export
 #'
 #' @examples
