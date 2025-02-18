@@ -23,10 +23,9 @@
 #' report_t(results2, cohensd = cohensd2, cohens_magnitude = TRUE)
 #'
 #' report_t(results2, effect = c("4", "6"))
-
 report_t <- function(ttest, effect = 1, digits = 3, cohensd = NULL, cohens_magnitude = FALSE) {
   if (!("rstatix_test" %in% attributes(ttest)$class) |
-      !("t_test" %in% attributes(ttest)$class)) {
+    !("t_test" %in% attributes(ttest)$class)) {
     stop("The t test input must be an rstatix::t_test object")
   }
 
@@ -47,9 +46,8 @@ report_t <- function(ttest, effect = 1, digits = 3, cohensd = NULL, cohens_magni
   }
 
   if (!is.null(cohensd)) {
-
     if (!("rstatix_test" %in% attributes(cohensd)$class) |
-        !("cohens_d" %in% attributes(cohensd)$class)) {
+      !("cohens_d" %in% attributes(cohensd)$class)) {
       stop("The cohens d input must be an rstatix::cohens_d object")
     }
 
@@ -69,34 +67,45 @@ report_t <- function(ttest, effect = 1, digits = 3, cohensd = NULL, cohens_magni
   if ("p.adj" %in% colnames(ttest)) {
     p_value <- ttest$p.adj[effect]
 
-    p_report <- stringr::str_c(", adjusted *p* ",
-                               format_p(p_value, digits = digits))
+    p_report <- stringr::str_c(
+      ", adjusted *p* ",
+      format_p(p_value, digits = digits)
+    )
   } else {
     p_value <- ttest$p[effect]
 
-    p_report <- stringr::str_c(", *p* ",
-                               format_p(p_value, digits = digits))
+    p_report <- stringr::str_c(
+      ", *p* ",
+      format_p(p_value, digits = digits)
+    )
   }
 
   cohens_report <- NULL
 
   if (!is.null(cohensd)) {
-    cohens_report <- stringr::str_c(", *d* = ",
-                                    format(cohensd$effsize[effect],
-                                           digits = digits))
+    cohens_report <- stringr::str_c(
+      ", *d* = ",
+      format(cohensd$effsize[effect],
+        digits = digits
+      )
+    )
 
     if (cohens_magnitude) {
-      cohens_report <- stringr::str_c(cohens_report,
-                                      ", indicating a ",
-                                      cohensd$magnitude[effect],
-                                      " effect")
+      cohens_report <- stringr::str_c(
+        cohens_report,
+        ", indicating a ",
+        cohensd$magnitude[effect],
+        " effect"
+      )
     }
   }
 
-  stringr::str_c("*t*~(",
-                 format(ttest$df[effect], digits = digits),
-                 ")~ = ",
-                 format(ttest$statistic[effect], digits = digits),
-                 p_report,
-                 cohens_report)
+  stringr::str_c(
+    "*t*~(",
+    format(ttest$df[effect], digits = digits),
+    ")~ = ",
+    format(ttest$statistic[effect], digits = digits),
+    p_report,
+    cohens_report
+  )
 }

@@ -15,10 +15,9 @@
 #' report_anova(results)
 #' report_anova(results, effect = "cyl")
 #' report_anova(results, effect = 2)
-
 report_anova <- function(ANOVA, effect = 1, digits = 3) {
   if (!("rstatix_test" %in% attributes(ANOVA)$class) |
-      !("anova_test" %in% attributes(ANOVA)$class)) {
+    !("anova_test" %in% attributes(ANOVA)$class)) {
     stop("The ANOVA input must be an rstatix::anova_test object")
   }
 
@@ -34,15 +33,17 @@ report_anova <- function(ANOVA, effect = 1, digits = 3) {
     stop("The effect number is greater than the number of effects in the ANOVA table")
   }
 
-  stringr::str_c("*F*~(",
-                 ANOVA$DFn[effect],
-                 ",",
-                 ANOVA$DFd[effect],
-                 ")~ = ",
-                 format(ANOVA$F[effect], digits = digits),
-                 " *p* ",
-                 format_p(ANOVA$p[effect], digits = digits),
-                 ", $",
-                 "\\eta^2_G$ = ",
-                 format(ANOVA$ges[effect], digits = digits))
+  stringr::str_c(
+    "*F*~(",
+    ANOVA$DFn[effect],
+    ",",
+    ANOVA$DFd[effect],
+    ")~ = ",
+    format(ANOVA$F[effect], digits = digits),
+    " *p* ",
+    format_p(ANOVA$p[effect], digits = digits),
+    ", $",
+    "\\eta^2_G$ = ",
+    format(ANOVA$ges[effect], digits = digits)
+  )
 }

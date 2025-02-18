@@ -9,7 +9,6 @@
 #' @examples
 #' p <- 0.00445463
 #' format_p(p)
-
 format_p <- function(p_value, digits = 3) {
   stopifnot(is.numeric(p_value), length(p_value) == 1)
 

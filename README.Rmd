@@ -37,12 +37,12 @@ Some basic examples which shows you how to generate reports for ANOVAs and t-tes
 library(statsreportr)
 
 # ANOVAs
-results <- mtcars |> 
+results <- mtcars |>
   rstatix::anova_test(mpg ~ cyl)
 
 format_p(results$p)
 
-results2 <- mtcars |> 
+results2 <- mtcars |>
   rstatix::anova_test(mpg ~ cyl * carb)
 
 report_anova(results2)
@@ -50,20 +50,21 @@ report_anova(results2, "carb")
 report_anova(results2, 2)
 
 # t-tests
-results3 <- mtcars |> 
+results3 <- mtcars |>
   rstatix::t_test(mpg ~ am)
 
 report_t(results3)
 
-results4 <- mtcars |> 
+results4 <- mtcars |>
   rstatix::t_test(mpg ~ cyl)
 
-cohensd4 <- mtcars |> 
+cohensd4 <- mtcars |>
   rstatix::cohens_d(mpg ~ cyl)
 
-report_t(results4, effect = c("6", "8"), 
-         cohensd = cohensd4, cohens_magnitude = TRUE)
-
+report_t(results4,
+  effect = c("6", "8"),
+  cohensd = cohensd4, cohens_magnitude = TRUE
+)
 ```
 The intent of this package is to be used inline in a R Markdown or Quarto document. For example, the following inline code:
 
