@@ -69,7 +69,7 @@ The intent of this package is to be used inline in a R Markdown or Quarto docume
 
 
 ```{block}
-The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (`r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`). 
+The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (\``r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`\`). 
 ```
 
 Will render as:

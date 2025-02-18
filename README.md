@@ -68,7 +68,7 @@ Quarto document. For example, the following inline code:
 
 The results of the t test showed a significant difference in the mpg of
 6 vs 8 cylinder cars
-(`r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`).
+(\``r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`\`).
 
 Will render as:
 
