@@ -1,0 +1,30 @@
+---
+title: "statsreportr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{statsreportr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The goal of statsreportr is to make it easy to report the results of statistical analyses in inline code of a R Markdown or Quarto document.
+
+## Installation
+
+You can install the development version of statsreportr from [GitHub](https://github.com/) with:
+
+```{r, eval = FALSE}
+# install.packages("pak")
+pak::pak("KyleOfCanada/statsreportr")
+```
+
+```{r setup}
+library(statsreportr)
+```
