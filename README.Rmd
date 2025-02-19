@@ -70,11 +70,10 @@ report_t(results4,
 ```
 The intent of this package is to be used inline in a R Markdown or Quarto document. For example, the following inline code:
 
-
-```{block}
-The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (\``r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`\`). 
-```
+> ```{block, eval = FALSE}
+The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (`r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`). 
+> ```
 
 Will render as:
 
-The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (`r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`).
+> The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (`r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`).
