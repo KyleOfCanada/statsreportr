@@ -96,7 +96,8 @@ test_that("report_t throws errors with incorrect input", {
 
   expect_error(
     report_t(results2, cohensd = cohensd),
-    "The cohens_d must analyze the same effects as the t_test")
+    "The cohens_d must analyze the same effects as the t_test"
+  )
 
   expect_error(
     report_t(results, 2, cohensd = cohensd, cohens_magnitude = "test"),

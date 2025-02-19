@@ -47,9 +47,12 @@ format_p(results$p)
 results2 <- mtcars |>
   rstatix::anova_test(mpg ~ cyl * carb)
 
+results3 <- aov(mpg ~ cyl * carb, data = mtcars)
+
 report_anova(results2)
 report_anova(results2, "carb")
 report_anova(results2, 2)
+report_anova(results3, 2)
 
 # t-tests
 results3 <- mtcars |>

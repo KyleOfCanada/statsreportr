@@ -41,11 +41,15 @@ format_p(results$p)
 results2 <- mtcars |>
   rstatix::anova_test(mpg ~ cyl * carb)
 
+results3 <- aov(mpg ~ cyl * carb, data = mtcars)
+
 report_anova(results2)
 #> [1] "*F*~(1,28)~ = 47.2 *p* < 0.0001, $\\eta^2_G$ = 0.628"
 report_anova(results2, "carb")
 #> [1] "*F*~(1,28)~ = 1.55 *p* = 0.223, $\\eta^2_G$ = 0.052"
 report_anova(results2, 2)
+#> [1] "*F*~(1,28)~ = 1.55 *p* = 0.223, $\\eta^2_G$ = 0.052"
+report_anova(results3, 2)
 #> [1] "*F*~(1,28)~ = 1.55 *p* = 0.223, $\\eta^2_G$ = 0.052"
 
 # t-tests

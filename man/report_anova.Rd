@@ -7,7 +7,7 @@
 report_anova(ANOVA, effect = 1, digits = 3)
 }
 \arguments{
-\item{ANOVA}{an rstatix::anova_test object}
+\item{ANOVA}{an rstatix::anova_test object or a stats::aov object}
 
 \item{effect}{The name or row number of the Effect to report}
 
