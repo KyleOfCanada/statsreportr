@@ -1,41 +1,37 @@
 ---
-output: github_document
+title: "statsreportr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{statsreportr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  comment = "#>"
 )
 ```
 
-# statsreportr <img src="man/figures/logo.png" align="right" height="139" alt="statsreportr hexsticker" />
-
-<!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/KyleOfCanada/statsreportr/graph/badge.svg)](https://app.codecov.io/gh/KyleOfCanada/statsreportr)
-[![R-CMD-check](https://github.com/KyleOfCanada/statsreportr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/KyleOfCanada/statsreportr/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
-
 The goal of statsreportr is to make it easy to report the results of statistical analyses in inline code of a R Markdown or Quarto document.
+It is designed to work with the `rstatix` package, but can also use some other inputs, and when rendering to a pdf. The envisioned usecase is to use `rstatix` to perform the statistical tests, and then use `statsreportr` to format the results in a way that is easy to include in a scientific or statistical report.
+
 
 ## Installation
 
 You can install the development version of statsreportr from [GitHub](https://github.com/) with:
 
-``` r
+```{r, eval = FALSE}
 # install.packages("pak")
 pak::pak("KyleOfCanada/statsreportr")
 ```
 
-## Example
+## Examples
 
-Some basic examples which shows you how to generate reports for ANOVAs and t-tests:
+Here are examples of the functions in `statsreportr`. In these examples they are outputing to the R console, but they are intended to be used inline in a R Markdown or Quarto document.
 
-```{r example}
+```{r setup}
 library(statsreportr)
 
 # ANOVAs
@@ -71,7 +67,8 @@ report_t(results4,
   cohensd = cohensd4, cohens_magnitude = TRUE
 )
 ```
-The intent of this package is to be used inline in a R Markdown or Quarto document. For example, the following inline code:
+
+When used with inline code in a R Markdown or Quarto document, the following inline code:
 
 > ```{block, eval = FALSE}
 The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (\``r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`\`). 
@@ -80,3 +77,11 @@ The results of the t test showed a significant difference in the mpg of 6 vs 8 c
 Will render as:
 
 > The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (`r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`).
+
+## Functions
+
+The following functions are available in the package:
+
+- `format_p()`: Format p-values to be more readable.
+- `report_anova()`: Report the results of an ANOVA test.
+- `report_t()`: Report the results of a t-test.
