@@ -66,11 +66,9 @@ report_t <- function(
     }
 
     if (
-      !(
-        all(cohensd$.y. == ttest$.y.) &
-          all(cohensd$group1 == ttest$group1) &
-          all(cohensd$group2 == ttest$group2)
-      )
+      !(all(cohensd$.y. == ttest$.y.) &
+        all(cohensd$group1 == ttest$group1) &
+        all(cohensd$group2 == ttest$group2))
     ) {
       stop("The cohens_d must analyze the same effects as the t_test")
     }
