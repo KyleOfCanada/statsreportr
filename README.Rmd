@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# statsreportr
+# statsreportr <img src="man/figures/logo.png" align="right" height="139" alt="statsreportr hexsticker" />
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/KyleOfCanada/statsreportr/graph/badge.svg)](https://app.codecov.io/gh/KyleOfCanada/statsreportr)
