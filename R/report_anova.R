@@ -18,8 +18,10 @@
 report_anova <- function(ANOVA, effect = 1, digits = 3) {
   if ("aov" %in% attributes(ANOVA)$class) {
     ANOVA <- rstatix::anova_summary(ANOVA)
-  } else if (!("rstatix_test" %in% attributes(ANOVA)$class) |
-    !("anova_test" %in% attributes(ANOVA)$class)) {
+  } else if (
+    !("rstatix_test" %in% attributes(ANOVA)$class) |
+      !("anova_test" %in% attributes(ANOVA)$class)
+  ) {
     stop("The ANOVA input must be an aov or rstatix::anova_test object")
   }
 
@@ -36,22 +38,20 @@ report_anova <- function(ANOVA, effect = 1, digits = 3) {
   }
 
   if (effect > nrow(ANOVA)) {
-    stop("The effect number is greater than the number of effects in the ANOVA table")
+    stop(
+      "The effect number is greater than the number of effects in the ANOVA table"
+    )
   }
 
   if ("ges" %in% colnames(ANOVA)) {
     effect_size <- stringr::str_c(
       "\\eta^2_G$ = ",
-      format(ANOVA$ges[effect],
-        digits = digits
-      )
+      format(ANOVA$ges[effect], digits = digits)
     )
   } else if ("pes" %in% colnames(ANOVA)) {
     effect_size <- stringr::str_c(
       "\\eta^2_p$ = ",
-      format(ANOVA$pes[effect],
-        digits = digits
-      )
+      format(ANOVA$pes[effect], digits = digits)
     )
   } else {
     stop("The ANOVA table does not contain effect size information")
