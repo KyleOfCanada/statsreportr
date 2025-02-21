@@ -1,0 +1,9 @@
+pandoc: 3.1.11
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  statsreportr: statsreportr.html
+last_built: 2025-02-21T19:11Z
+urls:
+  reference: https://kyleofcanada.github.io/statsreportr/reference
+  article: https://kyleofcanada.github.io/statsreportr/articles
