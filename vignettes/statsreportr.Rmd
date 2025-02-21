@@ -15,6 +15,8 @@ knitr::opts_chunk$set(
 ```
 
 The goal of statsreportr is to make it easy to report the results of statistical analyses in inline code of a R Markdown or Quarto document.
+It is designed to work with the `rstatix` package, but can also use some other inputs, and when rendering to a pdf. The envisioned usecase is to use `rstatix` to perform the statistical tests, and then use `statsreportr` to format the results in a way that is easy to include in a scientific or statistical report.
+
 
 ## Installation
 
@@ -25,6 +27,61 @@ You can install the development version of statsreportr from [GitHub](https://gi
 pak::pak("KyleOfCanada/statsreportr")
 ```
 
+## Examples
+
+Here are examples of the functions in `statsreportr`. In these examples they are outputing to the R console, but they are intended to be used inline in a R Markdown or Quarto document.
+
 ```{r setup}
 library(statsreportr)
+
+# ANOVAs
+results <- mtcars |>
+  rstatix::anova_test(mpg ~ cyl)
+
+format_p(results$p)
+
+results2 <- mtcars |>
+  rstatix::anova_test(mpg ~ cyl * carb)
+
+results3 <- aov(mpg ~ cyl * carb, data = mtcars)
+
+report_anova(results2)
+report_anova(results2, "carb")
+report_anova(results2, 2)
+report_anova(results3, 2)
+
+# t-tests
+results3 <- mtcars |>
+  rstatix::t_test(mpg ~ am)
+
+report_t(results3)
+
+results4 <- mtcars |>
+  rstatix::t_test(mpg ~ cyl)
+
+cohensd4 <- mtcars |>
+  rstatix::cohens_d(mpg ~ cyl)
+
+report_t(results4,
+  effect = c("6", "8"),
+  cohensd = cohensd4, cohens_magnitude = TRUE
+)
 ```
+
+When used with inline code in a R Markdown or Quarto document, the following inline code:
+
+> ```{block, eval = FALSE}
+The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (\``r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`\`). 
+> ```
+
+Will render as:
+
+> The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (`r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`).
+
+## Functions
+
+The following functions are available in the package:
+
+- `format_p()`: Format p-values to be more readable.
+- `report_anova()`: Report the results of an ANOVA test.
+- `report_t()`: Report the results of a t-test.
