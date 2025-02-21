@@ -64,7 +64,7 @@ report_anova <- function(ANOVA, effect = 1, digits = 3) {
     ANOVA$DFd[effect],
     ")~ = ",
     format(ANOVA$F[effect], digits = digits),
-    " *p* ",
+    ", *p* ",
     format_p(ANOVA$p[effect], digits = digits),
     ", $",
     effect_size
