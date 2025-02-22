@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">statsreportr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,20 +127,32 @@ intended to be used inline in a R Markdown or Quarto document.</p>
 <span>  effect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"6"</span>, <span class="st">"8"</span><span class="op">)</span>,</span>
 <span>  cohensd <span class="op">=</span> <span class="va">cohensd4</span>, cohens_magnitude <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "*t*~(18.5)~ = 5.29, adjusted *p* &lt; 0.0001, *d* = 2.23, indicating a large effect"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "*t*~(18.5)~ = 5.29, adjusted *p* &lt; 0.0001, *d* = 2.23, indicating a large effect"</span></span>
+<span></span>
+<span><span class="co"># Descriptive stats</span></span>
+<span></span>
+<span><span class="va">mtcars</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/report_mean_sd.html">report_mean_sd</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, effect <span class="op">=</span> <span class="st">"6"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "19.7 ± 1.45"</span></span>
+<span></span>
+<span><span class="va">mtcars</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/report_mean_sem.html">report_mean_sem</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, effect <span class="op">=</span> <span class="st">"6"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "19.7 ± 0.549"</span></span></code></pre></div>
 <p>When used with inline code in a R Markdown or Quarto document, the
 following inline code:</p>
 <blockquote>
 <p>The results of the t test showed a significant difference in the mpg
-of 6 vs 8 cylinder cars
+of 6
+(`<code>r mtcars |&gt; report_mean_sd(mpg, cyl, effect = "6")</code>`)
+vs 8
+((`<code>r mtcars |&gt; report_mean_sd(mpg, cyl, effect = "8")</code>`))
+cylinder cars
 (`<code>r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)</code>`).</p>
 </blockquote>
 <p>Will render as:</p>
 <blockquote>
 <p>The results of the t test showed a significant difference in the mpg
-of 6 vs 8 cylinder cars (<em>t</em><sub>(18.5)</sub> = 5.29, adjusted
-<em>p</em> &lt; 0.0001, <em>d</em> = 2.23, indicating a large
-effect).</p>
+of 6 (19.7 ± 1.45) vs 8 (15.1 ± 2.56) cylinder cars
+(<em>t</em><sub>(18.5)</sub> = 5.29, adjusted <em>p</em> &lt; 0.0001,
+<em>d</em> = 2.23, indicating a large effect).</p>
 </blockquote>
 </div>
 <div class="section level2">
@@ -150,6 +162,12 @@ effect).</p>
 <ul>
 <li>
 <code><a href="../reference/format_p.html">format_p()</a></code>: Format p-values to be more readable.</li>
+<li>
+<code><a href="../reference/report_mean_sd.html">report_mean_sd()</a></code>: Report the mean and standard
+deviation of a variable.</li>
+<li>
+<code><a href="../reference/report_mean_sem.html">report_mean_sem()</a></code>: Report the mean and standard error
+of the mean of a variable.</li>
 <li>
 <code><a href="../reference/report_anova.html">report_anova()</a></code>: Report the results of an ANOVA
 test.</li>
