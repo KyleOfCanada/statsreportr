@@ -2,4 +2,6 @@
 
 export(format_p)
 export(report_anova)
+export(report_mean_sd)
+export(report_mean_sem)
 export(report_t)
