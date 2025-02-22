@@ -23,15 +23,25 @@
 #' report_t(results2, cohensd = cohensd2, cohens_magnitude = TRUE)
 #'
 #' report_t(results2, effect = c("4", "6"))
-report_t <- function(ttest, effect = 1, digits = 3, cohensd = NULL, cohens_magnitude = FALSE) {
-  if (!("rstatix_test" %in% attributes(ttest)$class) |
-    !("t_test" %in% attributes(ttest)$class)) {
+report_t <- function(
+  ttest,
+  effect = 1,
+  digits = 3,
+  cohensd = NULL,
+  cohens_magnitude = FALSE
+) {
+  if (
+    !("rstatix_test" %in% attributes(ttest)$class) |
+      !("t_test" %in% attributes(ttest)$class)
+  ) {
     stop("The t test input must be an rstatix::t_test object")
   }
 
   if (is.character(effect)) {
     if (length(effect) != 2) {
-      stop("The effect must be a vector of length 2 corresponding to the group1 and group2 columns in the t test")
+      stop(
+        "The effect must be a vector of length 2 corresponding to the group1 and group2 columns in the t test"
+      )
     }
 
     effect <- which(ttest$group1 == effect[1] & ttest$group2 == effect[2])
@@ -42,16 +52,24 @@ report_t <- function(ttest, effect = 1, digits = 3, cohensd = NULL, cohens_magni
   }
 
   if (effect > nrow(ttest)) {
-    stop("The effect number is greater than the number of effects in the t_test table")
+    stop(
+      "The effect number is greater than the number of effects in the t_test table"
+    )
   }
 
   if (!is.null(cohensd)) {
-    if (!("rstatix_test" %in% attributes(cohensd)$class) |
-      !("cohens_d" %in% attributes(cohensd)$class)) {
+    if (
+      !("rstatix_test" %in% attributes(cohensd)$class) |
+        !("cohens_d" %in% attributes(cohensd)$class)
+    ) {
       stop("The cohens d input must be an rstatix::cohens_d object")
     }
 
-    if (!(all(cohensd$.y. == ttest$.y.) & all(cohensd$group1 == ttest$group1) & all(cohensd$group2 == ttest$group2))) {
+    if (
+      !(all(cohensd$.y. == ttest$.y.) &
+        all(cohensd$group1 == ttest$group1) &
+        all(cohensd$group2 == ttest$group2))
+    ) {
       stop("The cohens_d must analyze the same effects as the t_test")
     }
 
@@ -81,9 +99,7 @@ report_t <- function(ttest, effect = 1, digits = 3, cohensd = NULL, cohens_magni
   if (!is.null(cohensd)) {
     cohens_report <- stringr::str_c(
       ", *d* = ",
-      format(cohensd$effsize[effect],
-        digits = digits
-      )
+      format(cohensd$effsize[effect], digits = digits)
     )
 
     if (cohens_magnitude) {

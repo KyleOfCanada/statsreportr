@@ -70,17 +70,28 @@ report_t(results4,
   cohensd = cohensd4, cohens_magnitude = TRUE
 )
 #> [1] "*t*~(18.5)~ = 5.29, adjusted *p* < 0.0001, *d* = 2.23, indicating a large effect"
+
+# Descriptive stats
+
+mtcars |> report_mean_sd(mpg, cyl, effect = "6")
+#> [1] "19.7 ± 1.45"
+
+mtcars |> report_mean_sem(mpg, cyl, effect = "6")
+#> [1] "19.7 ± 0.549"
 ```
 
 The intent of this package is to be used inline in a R Markdown or
 Quarto document. For example, the following inline code:
 
 > The results of the t test showed a significant difference in the mpg
-> of 6 vs 8 cylinder cars
+> of 6 (\``r mtcars |> report_mean_sd(mpg, cyl, effect = "6")`\`) vs 8
+> ((\``r mtcars |> report_mean_sd(mpg, cyl, effect = "8")`\`)) cylinder
+> cars
 > (\``r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`\`).
 
 Will render as:
 
 > The results of the t test showed a significant difference in the mpg
-> of 6 vs 8 cylinder cars (*t*<sub>(18.5)</sub> = 5.29, adjusted *p* \<
-> 0.0001, *d* = 2.23, indicating a large effect).
+> of 6 (19.7 ± 1.45) vs 8 (15.1 ± 2.56) cylinder cars
+> (*t*<sub>(18.5)</sub> = 5.29, adjusted *p* \< 0.0001, *d* = 2.23,
+> indicating a large effect).

@@ -55,10 +55,7 @@ test_that("report_t accepts cohens d magnitude argument", {
   cohensd <- rstatix::cohens_d(mtcars, mpg ~ cyl)
 
   expect_equal(
-    report_t(results, 2,
-      cohensd = cohensd,
-      cohens_magnitude = TRUE
-    ),
+    report_t(results, 2, cohensd = cohensd, cohens_magnitude = TRUE),
     "*t*~(15)~ = 7.6, adjusted *p* < 0.0001, *d* = 3.15, indicating a large effect"
   )
 })

@@ -66,22 +66,30 @@ report_t(results4,
   effect = c("6", "8"),
   cohensd = cohensd4, cohens_magnitude = TRUE
 )
+
+# Descriptive stats
+
+mtcars |> report_mean_sd(mpg, cyl, effect = "6")
+
+mtcars |> report_mean_sem(mpg, cyl, effect = "6")
 ```
 
 When used with inline code in a R Markdown or Quarto document, the following inline code:
 
 > ```{block, eval = FALSE}
-The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (\``r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`\`). 
+The results of the t test showed a significant difference in the mpg of 6 (\``r mtcars |> report_mean_sd(mpg, cyl, effect = "6")`\`) vs 8 ((\``r mtcars |> report_mean_sd(mpg, cyl, effect = "8")`\`)) cylinder cars (\``r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`\`). 
 > ```
 
 Will render as:
 
-> The results of the t test showed a significant difference in the mpg of 6 vs 8 cylinder cars (`r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`).
+> The results of the t test showed a significant difference in the mpg of 6 (`r mtcars |> report_mean_sd(mpg, cyl, effect = "6")`) vs 8 (`r mtcars |> report_mean_sd(mpg, cyl, effect = "8")`) cylinder cars (`r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`).
 
 ## Functions
 
 The following functions are available in the package:
 
 - `format_p()`: Format p-values to be more readable.
+- `report_mean_sd()`: Report the mean and standard deviation of a variable.
+- `report_mean_sem()`: Report the mean and standard error of the mean of a variable.
 - `report_anova()`: Report the results of an ANOVA test.
 - `report_t()`: Report the results of a t-test.
