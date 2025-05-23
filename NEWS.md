@@ -2,7 +2,7 @@
 
 # statsreportr 0.0.0.9002
 
-* `report_pc` added to the package. This function is used to report the results of a pairwise comparison test. It is designed to be used in conjunction with the function `emmeans_test()` from the 'rstatix' R package, and to be used in inline r code within R Markdown and Quarto documents.
+* `report_pc()` added to the package. This function is used to report the results of a pairwise comparison test. It is designed to be used in conjunction with the function `emmeans_test()` from the 'rstatix' R package, and to be used in inline r code within R Markdown and Quarto documents.
 
 # statsreportr 0.0.0.9001
 

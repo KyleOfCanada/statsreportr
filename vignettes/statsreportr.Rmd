@@ -93,3 +93,4 @@ The following functions are available in the package:
 - `report_mean_sem()`: Report the mean and standard error of the mean of a variable.
 - `report_anova()`: Report the results of an ANOVA test.
 - `report_t()`: Report the results of a t-test.
+- `report_pc()`: Report the results of a pairwise comparisons test.
