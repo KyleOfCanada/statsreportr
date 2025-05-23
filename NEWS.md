@@ -1,3 +1,9 @@
+# statsreportr (development version)
+
+# statsreportr 0.0.0.9002
+
+* `report_pc` added to the package. This function is used to report the results of a pairwise comparison test. It is designed to be used in conjunction with the function `emmeans_test()` from the 'rstatix' R package, and to be used in inline r code within R Markdown and Quarto documents.
+
 # statsreportr 0.0.0.9001
 
 * `report_mean_sd()` and `report_mean_sem()` added to the package. These functions are used to report the mean and standard deviation or standard error of a dataset, respectively. They are designed to be used in inline r code within R Markdown and Quarto documents.
