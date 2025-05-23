@@ -68,19 +68,17 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/" class="external-link">rstatix</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/emmeans_test.html" class="external-link">emmeans_test</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in required_package("emmeans"):</span> emmeans package needed to be installed before using this function. Type this in R: install.packages('emmeans')</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">report_pc</span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'results' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "*t*~(30)~ = -4.11, adjusted *p* &lt; 0.001"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">results2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/emmeans_test.html" class="external-link">emmeans_test</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, p.adjust.method <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in required_package("emmeans"):</span> emmeans package needed to be installed before using this function. Type this in R: install.packages('emmeans')</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">report_pc</span><span class="op">(</span><span class="va">results2</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'results2' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "*t*~(29)~ = 4.44, *p* &lt; 0.001"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">report_pc</span><span class="op">(</span><span class="va">results2</span>, effect <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"4"</span>, <span class="st">"6"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'results2' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "*t*~(29)~ = 4.44, *p* &lt; 0.001"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
