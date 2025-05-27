@@ -17,9 +17,14 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
+    broom,
     dplyr (>= 1.1.4),
+    magrittr,
+    purrr,
+    rlang,
     rstatix (>= 0.7.2),
-    stringr (>= 1.5.1)
+    stringr (>= 1.5.1),
+    tidyselect
 Depends:
     R (>= 4.1.0)    
 URL: https://github.com/KyleOfCanada/statsreportr, https://kyleofcanada.github.io/statsreportr/
