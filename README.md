@@ -85,7 +85,7 @@ Quarto document. For example, the following inline code:
 
 > The results of the t test showed a significant difference in the mpg
 > of 6 (\``r mtcars |> report_mean_sd(mpg, cyl, effect = "6")`\`) vs 8
-> ((\``r mtcars |> report_mean_sd(mpg, cyl, effect = "8")`\`)) cylinder
+> (\``r mtcars |> report_mean_sd(mpg, cyl, effect = "8")`\`) cylinder
 > cars
 > (\``r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)`\`).
 
