@@ -1,5 +1,9 @@
 # statsreportr (development version)
 
+# statsreportr 0.0.0.9006
+
+* `report_pc()` now takes into consideration the order of named `effect` argument to determine the direction of the effect size in the output.
+
 # statsreportr 0.0.0.9005
 
 * `report_pc()` fixed bug in data selection during effect size calculation.
