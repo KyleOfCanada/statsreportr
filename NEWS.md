@@ -1,5 +1,9 @@
 # statsreportr (development version)
 
+# statsreportr 0.0.0.9004
+
+* `report_pc()` now is able to report effect sizes for pairwise comparisons. The effect size is calculated using the `emmeans::eff_size()` function.
+
 # statsreportr 0.0.0.9003
 
 * `cor_test()` and `report_cor()` added to the package. These functions are used to report the results of correlation tests. `cor_test()` is modified version of `rstatix::cor_test()` that will save the degrees of freedom of a Pearson correlation in the output, and `report_cor()` formats the results for reporting in R Markdown and Quarto documents.

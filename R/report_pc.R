@@ -3,6 +3,7 @@
 #' @param pairwise_comparison an rstatix::emmeans_test object
 #' @param effect The names or row number of the effect to report
 #' @param digits The number of digits to round the p value to
+#' @param effect_size Whether to include the effect size in the report
 #'
 #' @returns A string with the formatted pairwise comparison result for use inline in an R Markdown or Quarto document
 #' @export
@@ -22,7 +23,8 @@
 report_pc <- function(
   pairwise_comparison,
   effect = 1,
-  digits = 3
+  digits = 3,
+  effect_size = TRUE
 ) {
   if (
     !("rstatix_test" %in% attributes(pairwise_comparison)$class) |
@@ -73,6 +75,49 @@ report_pc <- function(
     p_report <- stringr::str_c(
       ", adjusted *p* ",
       format_p(p_value, digits = digits)
+    )
+  }
+
+  if (effect_size) {
+    formula_ef <- stats::formula(paste(
+      pairwise_comparison$.y.[effect],
+      "~",
+      pairwise_comparison$term[effect]
+    ))
+    data_ef <- attributes(pairwise_comparison)$args$data
+
+    y_ef <- which(colnames(data_ef) == pairwise_comparison$term[effect])
+    rows_ef <- which(
+      data_ef[, y_ef] %in%
+        c(
+          pairwise_comparison$group1[effect],
+          pairwise_comparison$group2[effect]
+        )
+    )
+    data_ef <- data_ef[rows_ef, ]
+
+    lm_ef <- stats::lm(formula_ef, data_ef)
+    em_ef <- emmeans::emmeans(
+      lm_ef,
+      pairwise_comparison$term[effect],
+      adjust = attributes(pairwise_comparison)$args$p.adjust.method
+    )
+
+    ef_size <- emmeans::eff_size(
+      em_ef,
+      sigma = stats::sigma(lm_ef),
+      edf = pairwise_comparison$df[effect]
+    )
+
+    ef_size <- format(
+      summary(ef_size)$effect.size,
+      digits = digits
+    )
+
+    p_report <- stringr::str_c(
+      p_report,
+      ", *d* = ",
+      ef_size
     )
   }
 
