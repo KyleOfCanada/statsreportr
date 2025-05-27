@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   statsreportr: statsreportr.html
-last_built: 2025-05-27T12:58Z
+last_built: 2025-05-27T19:15Z
 urls:
   reference: https://kyleofcanada.github.io/statsreportr/reference
   article: https://kyleofcanada.github.io/statsreportr/articles

@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">statsreportr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +125,7 @@
 <span><span class="co">#&gt; [1] "19.7 ± 0.549"</span></span></code></pre></div>
 <p>The intent of this package is to be used inline in a R Markdown or Quarto document. For example, the following inline code:</p>
 <blockquote>
-<p>The results of the t test showed a significant difference in the mpg of 6 (`<code>r mtcars |&gt; report_mean_sd(mpg, cyl, effect = "6")</code>`) vs 8 ((`<code>r mtcars |&gt; report_mean_sd(mpg, cyl, effect = "8")</code>`)) cylinder cars (`<code>r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)</code>`).</p>
+<p>The results of the t test showed a significant difference in the mpg of 6 (`<code>r mtcars |&gt; report_mean_sd(mpg, cyl, effect = "6")</code>`) vs 8 (`<code>r mtcars |&gt; report_mean_sd(mpg, cyl, effect = "8")</code>`) cylinder cars (`<code>r report_t(results4, effect = c("6", "8"), cohensd = cohensd4, cohens_magnitude = TRUE)</code>`).</p>
 </blockquote>
 <p>Will render as:</p>
 <blockquote>
