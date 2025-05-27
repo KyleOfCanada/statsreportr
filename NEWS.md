@@ -1,5 +1,9 @@
 # statsreportr (development version)
 
+# statsreportr 0.0.0.9003
+
+* `cor_test()` and `report_cor()` added to the package. These functions are used to report the results of correlation tests. `cor_test()` is modified version of `rstatix::cor_test()` that will save the degrees of freedom of a Pearson correlation in the output, and `report_cor()` formats the results for reporting in R Markdown and Quarto documents.
+
 # statsreportr 0.0.0.9002
 
 * `report_pc()` added to the package. This function is used to report the results of a pairwise comparison test. It is designed to be used in conjunction with the function `emmeans_test()` from the 'rstatix' R package, and to be used in inline r code within R Markdown and Quarto documents.

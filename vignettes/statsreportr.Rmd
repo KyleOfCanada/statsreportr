@@ -94,3 +94,5 @@ The following functions are available in the package:
 - `report_anova()`: Report the results of an ANOVA test.
 - `report_t()`: Report the results of a t-test.
 - `report_pc()`: Report the results of a pairwise comparisons test.
+- `cor_test()`: Conduct a correlation test.
+- `report_cor()`: Report the results of a correlation test.
