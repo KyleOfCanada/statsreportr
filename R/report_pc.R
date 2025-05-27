@@ -79,7 +79,7 @@ report_pc <- function(
   }
 
   if (effect_size) {
-    formula_ef <- formula(paste(
+    formula_ef <- stats::formula(paste(
       pairwise_comparison$.y.[effect],
       "~",
       pairwise_comparison$term[effect]
@@ -96,7 +96,7 @@ report_pc <- function(
     )
     data_ef <- data_ef[rows_ef, ]
 
-    lm_ef <- lm(formula_ef, data_ef)
+    lm_ef <- stats::lm(formula_ef, data_ef)
     em_ef <- emmeans::emmeans(
       lm_ef,
       pairwise_comparison$term[effect],

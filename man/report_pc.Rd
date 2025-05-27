@@ -4,7 +4,7 @@
 \alias{report_pc}
 \title{Report a pairwise comparison result in text}
 \usage{
-report_pc(pairwise_comparison, effect = 1, digits = 3)
+report_pc(pairwise_comparison, effect = 1, digits = 3, effect_size = TRUE)
 }
 \arguments{
 \item{pairwise_comparison}{an rstatix::emmeans_test object}
@@ -12,6 +12,8 @@ report_pc(pairwise_comparison, effect = 1, digits = 3)
 \item{effect}{The names or row number of the effect to report}
 
 \item{digits}{The number of digits to round the p value to}
+
+\item{effect_size}{Whether to include the effect size in the report}
 }
 \value{
 A string with the formatted pairwise comparison result for use inline in an R Markdown or Quarto document
