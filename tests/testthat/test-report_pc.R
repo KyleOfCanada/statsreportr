@@ -3,12 +3,17 @@ test_that("report_pc works", {
   results2 <- rstatix::emmeans_test(mtcars, mpg ~ am, p.adjust.method = "none")
 
   expect_equal(
-    report_pc(results),
+    report_pc(results, effect_size = FALSE),
     "*t*~(29)~ = 4.44, adjusted *p* < 0.001"
   )
 
   expect_equal(
-    report_pc(results2),
+    report_pc(results, effect_size = TRUE),
+    "*t*~(29)~ = 4.44, adjusted *p* < 0.001, *d* = 1.88"
+  )
+
+  expect_equal(
+    report_pc(results2, effect_size = FALSE),
     "*t*~(30)~ = -4.11, *p* < 0.001"
   )
 })
@@ -17,7 +22,7 @@ test_that("report_pc accepts numeric effect argument", {
   results <- rstatix::emmeans_test(mtcars, mpg ~ cyl)
 
   expect_equal(
-    report_pc(results, 2),
+    report_pc(results, 2, effect_size = FALSE),
     "*t*~(29)~ = 8.9, adjusted *p* < 0.0001"
   )
 })
@@ -26,7 +31,7 @@ test_that("report_pc accepts string effect argument", {
   results <- rstatix::emmeans_test(mtcars, mpg ~ cyl)
 
   expect_equal(
-    report_pc(results, c("4", "6")),
+    report_pc(results, c("4", "6"), effect_size = FALSE),
     "*t*~(29)~ = 4.44, adjusted *p* < 0.001"
   )
 })
@@ -35,12 +40,12 @@ test_that("report_pc accepts digits argument", {
   results <- rstatix::emmeans_test(mtcars, mpg ~ cyl)
 
   expect_equal(
-    report_pc(results, 2, digits = 1),
+    report_pc(results, 2, digits = 1, effect_size = FALSE),
     "*t*~(29)~ = 9, adjusted *p* < 0.0001"
   )
 
   expect_error(
-    report_pc(results, 2, digits = "test"),
+    report_pc(results, 2, digits = "test", effect_size = FALSE),
     "The digits argument must be a number"
   )
 })
