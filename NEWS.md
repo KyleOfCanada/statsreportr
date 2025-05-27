@@ -1,5 +1,9 @@
 # statsreportr (development version)
 
+# statsreportr 0.0.0.9005
+
+* `report_pc()` fixed bug in data selection during effect size calculation.
+
 # statsreportr 0.0.0.9004
 
 * `report_pc()` now is able to report effect sizes for pairwise comparisons. The effect size is calculated using the `emmeans::eff_size()` function.
