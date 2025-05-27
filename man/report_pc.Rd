@@ -30,7 +30,7 @@ report_pc(results)
 
 results2 <- emmeans_test(mtcars, mpg ~ cyl, p.adjust.method = "none")
 
-report_pc(results2)
+report_pc(results2, effect = 3)
 
 report_pc(results2, effect = c("4", "6"))
 }

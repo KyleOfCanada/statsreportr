@@ -17,7 +17,7 @@
 #'
 #' results2 <- emmeans_test(mtcars, mpg ~ cyl, p.adjust.method = "none")
 #'
-#' report_pc(results2)
+#' report_pc(results2, effect = 3)
 #'
 #' report_pc(results2, effect = c("4", "6"))
 report_pc <- function(
@@ -88,7 +88,8 @@ report_pc <- function(
 
     y_ef <- which(colnames(data_ef) == pairwise_comparison$term[effect])
     rows_ef <- which(
-      data_ef[, y_ef] %in%
+      data_ef |>
+        dplyr::pull(y_ef) %in%
         c(
           pairwise_comparison$group1[effect],
           pairwise_comparison$group2[effect]
