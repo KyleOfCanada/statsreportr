@@ -23,6 +23,7 @@
 report_pc <- function(
   pairwise_comparison,
   effect = 1,
+  group = NULL,
   digits = 3,
   effect_size = TRUE
 ) {
@@ -33,6 +34,31 @@ report_pc <- function(
     stop(
       "The pairwise comparison input must be an rstatix::emmeans_test object"
     )
+  }
+
+  if (!is.null(group)) {
+    grouping_vars <- colnames(pairwise_comparison)[
+      -(length(colnames(pairwise_comparison)) - 8):-(length(colnames(
+        pairwise_comparison
+      )))
+    ]
+    if (length(grouping_vars) == 0) {
+      stop("The pairwise_comparison object has no grouping variables")
+    }
+    if (!all(names(group) %in% grouping_vars)) {
+      stop(
+        "The group argument must be a named vector with names corresponding to the grouping variables of the pairwise_comparison object"
+      )
+    }
+    if (length(group) != length(grouping_vars)) {
+      stop(
+        "The group argument must be a named vector with names corresponding to the grouping variables of the pairwise_comparison object"
+      )
+    }
+    for (i in seq_along(group)) {
+      pairwise_comparison <- pairwise_comparison |>
+        dplyr::filter(.data[[names(group[i])]] == group[i])
+    }
   }
 
   if (!is.logical(effect_size)) {
