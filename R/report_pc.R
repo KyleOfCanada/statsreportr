@@ -1,7 +1,8 @@
 #' Report a pairwise comparison result in text
 #'
-#' @param pairwise_comparison an rstatix::emmeans_test object
+#' @param pairwise_comparison An rstatix::emmeans_test object
 #' @param effect The names or row number of the effect to report
+#' @param group A named vector of grouping variables to filter the pairwise comparison results by
 #' @param digits The number of digits to round the p value to
 #' @param effect_size Whether to include the effect size in the report
 #'
@@ -36,12 +37,50 @@ report_pc <- function(
     )
   }
 
+  if (is.character(effect)) {
+    if (length(effect) != 2) {
+      stop(
+        "The effect must be a vector of length 2 corresponding to the group1 and group2 columns in the emmeans test or a single numeric value corresponding to the row number in the emmeans_test table"
+      )
+    }
+  } else if (is.numeric(effect) & length(effect) != 1) {
+    stop(
+      "The effect must be a single numeric value or a vector of length 2 corresponding to the group1 and group2 columns in the emmeans test"
+    )
+  } else if (!is.numeric(effect)) {
+    stop(
+      "The effect must be a single numeric value or a vector of length 2 corresponding to the group1 and group2 columns in the emmeans test"
+    )
+  }
+
+  if (is.numeric(effect)) {
+    if (effect < 1) {
+      stop("The effect number must be greater than 0")
+    }
+
+    if (effect > nrow(pairwise_comparison)) {
+      stop(
+        "The effect number is greater than the number of effects in the emmeans_test table"
+      )
+    }
+  }
+
+  if (!(is.numeric(digits) & length(digits) == 1 & digits >= 0)) {
+    stop("The digits argument must be a single positive number")
+  }
+
   if (!is.null(group)) {
     grouping_vars <- colnames(pairwise_comparison)[
       -(length(colnames(pairwise_comparison)) - 8):-(length(colnames(
         pairwise_comparison
       )))
     ]
+
+    if (is.numeric(effect)) {
+      tmp_effect <- pairwise_comparison[effect, ]
+      effect <- c(tmp_effect$group1, tmp_effect$group2)
+    }
+
     if (length(grouping_vars) == 0) {
       stop("The pairwise_comparison object has no grouping variables")
     }
@@ -55,9 +94,30 @@ report_pc <- function(
         "The group argument must be a named vector with names corresponding to the grouping variables of the pairwise_comparison object"
       )
     }
+
     for (i in seq_along(group)) {
       pairwise_comparison <- pairwise_comparison |>
         dplyr::filter(.data[[names(group[i])]] == group[i])
+    }
+
+    if (is.numeric(effect)) {
+      effect_row <- which(
+        pairwise_comparison$group1 == effect[1] &
+          pairwise_comparison$group2 == effect[2]
+      )
+
+      if (length(effect_row) == 0) {
+        effect_row <- which(
+          pairwise_comparison$group1 == effect[2] &
+            pairwise_comparison$group2 == effect[1]
+        )
+
+        if (length(effect_row) == 0) {
+          stop(
+            "The pair of effects are not in the emmeans_test table once filtered by group"
+          )
+        }
+      }
     }
   }
 
@@ -68,12 +128,6 @@ report_pc <- function(
   reverse_effect_size <- FALSE
 
   if (is.character(effect)) {
-    if (length(effect) != 2) {
-      stop(
-        "The effect must be a vector of length 2 corresponding to the group1 and group2 columns in the emmeans test"
-      )
-    }
-
     effect_row <- which(
       pairwise_comparison$group1 == effect[1] &
         pairwise_comparison$group2 == effect[2]
@@ -91,32 +145,8 @@ report_pc <- function(
         stop("The pair of effects are not in the emmeans_test table")
       }
     }
-  } else if (is.numeric(effect) & length(effect) != 1) {
-    stop(
-      "The effect must be a single numeric value or a vector of length 2 corresponding to the group1 and group2 columns in the emmeans test"
-    )
-  } else if (!is.numeric(effect)) {
-    stop(
-      "The effect must be a single numeric value or a vector of length 2 corresponding to the group1 and group2 columns in the emmeans test"
-    )
   } else {
     effect_row <- effect
-  }
-
-  if (is.numeric(effect)) {
-    if (effect < 1) {
-      stop("The effect number must be greater than 0")
-    }
-
-    if (effect > nrow(pairwise_comparison)) {
-      stop(
-        "The effect number is greater than the number of effects in the emmeans_test table"
-      )
-    }
-  }
-
-  if (!is.numeric(digits)) {
-    stop("The digits argument must be a number")
   }
 
   if (attributes(pairwise_comparison)$args$p.adjust.method == "none") {
