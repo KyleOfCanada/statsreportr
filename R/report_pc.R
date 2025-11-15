@@ -97,7 +97,7 @@ report_pc <- function(
 
     for (i in seq_along(group)) {
       pairwise_comparison <- pairwise_comparison |>
-        dplyr::filter(.data[[names(group[i])]] == group[i])
+        dplyr::filter(pairwise_comparison[[names(group[i])]] == group[i])
     }
 
     if (is.numeric(effect)) {
