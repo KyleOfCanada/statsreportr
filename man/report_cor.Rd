@@ -20,18 +20,17 @@ a string with the formatted correlation result for use inline in an R Markdown o
 Report correlation result in text
 }
 \examples{
-library(rstatix)
-
 results <- mtcars |> cor_test(mpg, wt)
 report_cor(results)
 
 results2 <- mtcars |>
- group_by(cyl) |>
+ dplyr::group_by(cyl) |>
  cor_test(mpg, wt, method = "spearman")
 
 report_cor(results2, effect = 2)
 
-results3 <- mtcars \%>\% cor_test(
+results3 <- mtcars |>
+  cor_test(
     vars = "mpg",
     vars2 = c("disp", "hp", "drat"),
     method = "kendall"

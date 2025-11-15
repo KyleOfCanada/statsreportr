@@ -9,7 +9,7 @@ Description: Convenience functions to make reporting the results of 'rstatix'
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Suggests: 
     emmeans (>= 1.11.0),
     knitr,
