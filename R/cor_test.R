@@ -212,9 +212,10 @@ as_tidy_stat <- function(x, round.p = TRUE, digits = 3, stat.method = NULL) {
   if ("p.value" %in% colnames(res)) {
     res <- res |>
       dplyr::rename(p = p.value)
-    if (round.p)
+    if (round.p) {
       res <- res |>
         dplyr::mutate(p = signif(p, digits))
+    }
   }
   if ("parameter" %in% colnames(res)) {
     res <- res |>
@@ -244,7 +245,9 @@ get_stat_method <- function(x) {
     if (length(results) >= 2) {
       results <- paste(results, collapse = " ")
     }
-  } else results <- x$method
+  } else {
+    results <- x$method
+  }
   results
 }
 
@@ -261,7 +264,9 @@ get_quo_vars_list <- function(data, .enquos) {
   res <- .enquos |>
     purrr::map(~ get_quo_vars(data, .))
   res <- purrr::map(res, function(x) {
-    if (length(x) == 0) x <- NULL
+    if (length(x) == 0) {
+      x <- NULL
+    }
     x
   })
   res
