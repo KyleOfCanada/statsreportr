@@ -98,9 +98,11 @@ cor_test <- function(
     get_quo_vars_list(data, .enquos = _)
   vars <- .args$vars
   vars2 <- .args$vars2
-  vars <- data |> get_selected_vars(..., vars = vars)
+  vars <- data |>
+    get_selected_vars(..., vars = vars)
   n.vars <- length(vars)
-  data.numeric <- data |> select_numeric_columns()
+  data.numeric <- data |>
+    select_numeric_columns()
   if (is.null(vars2)) {
     if (is.null(vars)) {
       vars <- vars2 <- colnames(data.numeric)
@@ -112,10 +114,9 @@ cor_test <- function(
     } else if (n.vars > 2) {
       vars2 <- vars
     }
-  } # else if (is.null(vars)) {
-  #   stop("You should specify the argument vars in addition to vars2")
-  # }
-  expand.grid(y = vars2, x = vars, stringsAsFactors = FALSE) |>
+  }
+
+  tmp_dat <- expand.grid(y = vars2, x = vars, stringsAsFactors = FALSE) |>
     as.list() |>
     purrr::pmap(
       cor_test_xy,
@@ -127,6 +128,16 @@ cor_test <- function(
     ) |>
     dplyr::bind_rows() |>
     add_class(c("cor_test", "statsreportr_test"))
+
+  attributes(tmp_dat)$args$data <- data
+  attributes(tmp_dat)$args$vars <- vars
+  attributes(tmp_dat)$args$vars2 <- vars2
+  attributes(tmp_dat)$args$alternative <- alternative
+  attributes(tmp_dat)$args$method <- method
+  attributes(tmp_dat)$args$conf.level <- conf.level
+  attributes(tmp_dat)$args$use <- use
+
+  tmp_dat
 }
 
 #:::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -160,19 +171,6 @@ cor_test_xy <- function(
     dplyr::mutate(var1 = x, var2 = y, .before = "cor")
 }
 
-
-# # Multiple correlation tests between two vectors of variables.
-# #++++++++++++++++++++++++++++++++++++++++++++++++++++
-# # x,y character vectors containing variable names to be used in the
-# # correlation analysis.
-# mcor_test <- function(data, x, y, ...) {
-#   expand.grid(y = y, x = x, stringsAsFactors = FALSE) |>
-#     as.list() |>
-#     purrr::pmap(cor_test_xy, data = data, ...) |>
-#     dplyr::bind_rows() |>
-#     add_class("cor_test")
-# }
-
 # Tidy output for correlation test
 as_tidy_cor <- function(x) {
   estimate <- cor <- statistic <- p <-
@@ -193,7 +191,8 @@ as_tidy_cor <- function(x) {
         method
       )
   } else {
-    res |> dplyr::select(cor, statistic, p, method)
+    res |>
+      dplyr::select(cor, statistic, p, method)
   }
 }
 
@@ -211,19 +210,21 @@ as_tidy_stat <- function(x, round.p = TRUE, digits = 3, stat.method = NULL) {
     res |> dplyr::mutate(method = stat.method) -> res
   }
   if ("p.value" %in% colnames(res)) {
-    res <- res |> dplyr::rename(p = p.value)
-    if (round.p) res <- res |> dplyr::mutate(p = signif(p, digits))
+    res <- res |>
+      dplyr::rename(p = p.value)
+    if (round.p) {
+      res <- res |>
+        dplyr::mutate(p = signif(p, digits))
+    }
   }
   if ("parameter" %in% colnames(res)) {
-    res <- res |> dplyr::rename(df = .data$parameter)
+    res <- res |>
+      dplyr::rename(df = .data$parameter)
   }
   res
 }
 
 get_stat_method <- function(x) {
-  # if (inherits(x, c("aov", "anova"))) {
-  #   return("Anova")
-  # }
   available.methods <- c(
     "T-test",
     "Wilcoxon",
@@ -239,9 +240,14 @@ get_stat_method <- function(x) {
     purrr::map(grepl, x$method, ignore.case = TRUE) |>
     unlist()
   if (sum(used.method) > 0) {
-    results <- available.methods |> magrittr::extract(used.method)
-    if (length(results) >= 2) results <- paste(results, collapse = " ")
-  } else results <- x$method
+    results <- available.methods |>
+      magrittr::extract(used.method)
+    if (length(results) >= 2) {
+      results <- paste(results, collapse = " ")
+    }
+  } else {
+    results <- x$method
+  }
   results
 }
 
@@ -255,8 +261,14 @@ add_class <- function(x, .class) {
 
 get_quo_vars_list <- function(data, .enquos) {
   . <- NULL
-  res <- .enquos |> purrr::map(~ get_quo_vars(data, .))
-  res <- purrr::map(res, set_empty_to_null)
+  res <- .enquos |>
+    purrr::map(~ get_quo_vars(data, .))
+  res <- purrr::map(res, function(x) {
+    if (length(x) == 0) {
+      x <- NULL
+    }
+    x
+  })
   res
 }
 
@@ -264,30 +276,33 @@ get_quo_vars <- function(data, vars) {
   if (rlang::quo_is_missing(vars)) {
     return(NULL)
   }
-  names(data) |> tidyselect::vars_select(!!vars) |> magrittr::set_names(NULL)
+  names(data) |>
+    tidyselect::vars_select(!!vars) |>
+    magrittr::set_names(NULL)
 }
 
 get_selected_vars <- function(x, ..., vars = NULL) {
-  if (dplyr::is_grouped_df(x)) x <- x |> dplyr::ungroup()
+  if (dplyr::is_grouped_df(x)) {
+    x <- x |>
+      dplyr::ungroup()
+  }
   dot.vars <- rlang::quos(...)
   if (length(vars) > 0) {
     return(vars)
   }
-  if (length(dot.vars) == 0) selected <- colnames(x) else
+  if (length(dot.vars) == 0) {
+    selected <- colnames(x)
+  } else {
     selected <- tidyselect::vars_select(names(x), !!!dot.vars)
+  }
   selected |> as.character()
 }
 
 select_numeric_columns <- function(data) {
-  if (dplyr::is_grouped_df(data)) data <- data |> dplyr::ungroup()
-  data |> dplyr::select_if(is.numeric)
-}
-
-set_empty_to_null <- function(x) {
-  if (.is_empty(x)) x <- NULL
-  x
-}
-
-.is_empty <- function(x) {
-  length(x) == 0
+  if (dplyr::is_grouped_df(data)) {
+    data <- data |>
+      dplyr::ungroup()
+  }
+  data |>
+    dplyr::select_if(is.numeric)
 }

@@ -4,12 +4,20 @@
 \alias{report_pc}
 \title{Report a pairwise comparison result in text}
 \usage{
-report_pc(pairwise_comparison, effect = 1, digits = 3, effect_size = TRUE)
+report_pc(
+  pairwise_comparison,
+  effect = 1,
+  group = NULL,
+  digits = 3,
+  effect_size = TRUE
+)
 }
 \arguments{
-\item{pairwise_comparison}{an rstatix::emmeans_test object}
+\item{pairwise_comparison}{An rstatix::emmeans_test object}
 
 \item{effect}{The names or row number of the effect to report}
+
+\item{group}{A named vector of grouping variables to filter the pairwise comparison results by}
 
 \item{digits}{The number of digits to round the p value to}
 
