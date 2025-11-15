@@ -68,6 +68,67 @@ test_that("report_pc accepts digits argument", {
   )
 })
 
+test_that("report_pc works with grouping variable", {
+  results <- mtcars |>
+    dplyr::mutate(test = rep(c("a", "b"), each = 16)) |>
+    dplyr::group_by(test) |> 
+    rstatix::emmeans_test(mpg ~ cyl)
+
+  expect_equal(
+    report_pc(results, effect = c("4", "6"), group = c(test = "a")),
+    "*t*~(26)~ = 1.62, adjusted *p* = 0.349, *d* = 1.88"
+  )
+
+  expect_equal(
+    report_pc(results, effect = 2, group = c(test = "a")),
+    "*t*~(26)~ = 4.02, adjusted *p* = 0.00132, *d* = 3.26"
+  )
+})
+
+test_that("report_pc errors with incorrect grouping arguments", {
+  results <- mtcars |>
+    dplyr::mutate(test = rep(c("a", "b"), each = 16)) |>
+    dplyr::group_by(test) |> 
+    rstatix::emmeans_test(mpg ~ cyl)
+
+  results_2g <- mtcars |>
+    dplyr::mutate(test = rep(c("a", "b"), each = 16),
+      test2 = rep(c("c", "d"), 16)) |>
+    dplyr::group_by(test, test2) |> 
+    rstatix::emmeans_test(mpg ~ cyl)
+
+  results_no_group <- mtcars |>
+    rstatix::emmeans_test(mpg ~ cyl)
+
+  expect_error(
+    report_pc(results_no_group, effect = c("4", "6"), group = c(test = "a")),
+    "The pairwise_comparison object has no grouping variables"
+  )
+
+  expect_error(
+    report_pc(results, group = c(wrong = "c")),
+    "The group argument must be a named vector with names corresponding to the grouping variables of the pairwise_comparison object")
+  
+  expect_error(
+    report_pc(results, effect = c("4", "6"), group = c(test = "a", wrong = "c")),
+    "The group argument must be a named vector with names corresponding to the grouping variables of the pairwise_comparison object"
+  )
+  
+  expect_error(
+    report_pc(results, effect = 4, group = c(test = "a")),
+    "The effect number is greater than the number of effects in the emmeans_test table once filtered by group"
+  )
+  
+  expect_error(
+    report_pc(results_2g, effect = 4, group = c(test = "a", test2 = "c", test2 = "c")),
+    "The group argument must be a named vector with names corresponding to the grouping variables of the pairwise_comparison object"
+  )
+
+  expect_error(
+    report_pc(results, effect = c("4", "7"), group = c(test = "a")),
+    "The pair of effects are not in the emmeans_test table")
+})
+
 test_that("report_pc throws errors with incorrect input", {
   results <- rstatix::emmeans_test(mtcars, mpg ~ cyl)
   results2 <- rstatix::emmeans_test(mtcars, mpg ~ am)
