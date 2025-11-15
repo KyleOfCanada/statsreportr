@@ -64,7 +64,7 @@ test_that("report_pc accepts digits argument", {
 
   expect_error(
     report_pc(results, 2, digits = "test", effect_size = FALSE),
-    "The digits argument must be a number"
+    "The digits argument must be a single positive number"
   )
 })
 
