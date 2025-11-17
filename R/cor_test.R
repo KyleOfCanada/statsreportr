@@ -198,10 +198,9 @@ as_tidy_cor <- function(x) {
 
 # Create a tidy statistical output
 #:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# Generic function to create a tidy statistical output
 as_tidy_stat <- function(x, round.p = TRUE, digits = 3, stat.method = NULL) {
   estimate <- estimate1 <- estimate2 <- p.value <-
-    alternative <- p <- .data <- NULL
+    alternative <- p <- parameter <- .data <- NULL
   res <- broom::tidy(x)
   if (!is.null(stat.method)) {
     res |> dplyr::mutate(method = stat.method) -> res
@@ -218,8 +217,9 @@ as_tidy_stat <- function(x, round.p = TRUE, digits = 3, stat.method = NULL) {
     }
   }
   if ("parameter" %in% colnames(res)) {
+    # Avoid tidyselect/.data usage which is deprecated
     res <- res |>
-      dplyr::rename(df = .data$parameter)
+      dplyr::rename(df = parameter)
   }
   res
 }
@@ -276,9 +276,8 @@ get_quo_vars <- function(data, vars) {
   if (rlang::quo_is_missing(vars)) {
     return(NULL)
   }
-  names(data) |>
-    tidyselect::vars_select(!!vars) |>
-    magrittr::set_names(NULL)
+  sel <- tidyselect::eval_select(vars, data = data)
+  unname(names(sel))
 }
 
 get_selected_vars <- function(x, ..., vars = NULL) {
@@ -287,13 +286,14 @@ get_selected_vars <- function(x, ..., vars = NULL) {
       dplyr::ungroup()
   }
   dot.vars <- rlang::quos(...)
-  if (length(vars) > 0) {
+  if (!is.null(vars) && length(vars) > 0) {
     return(vars)
   }
   if (length(dot.vars) == 0) {
     selected <- colnames(x)
   } else {
-    selected <- tidyselect::vars_select(names(x), !!!dot.vars)
+    sel <- tidyselect::eval_select(rlang::expr(c(!!!dot.vars)), data = x)
+    selected <- names(sel)
   }
   selected |> as.character()
 }
@@ -304,5 +304,5 @@ select_numeric_columns <- function(data) {
       dplyr::ungroup()
   }
   data |>
-    dplyr::select_if(is.numeric)
+    dplyr::select(dplyr::where(is.numeric))
 }

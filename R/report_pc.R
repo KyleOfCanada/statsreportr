@@ -105,33 +105,12 @@ report_pc <- function(
 
     if (numeric_effect) {
       effect_row <- effect_copy
-      #FIXME
-      print(effect_row)
-      print(pairwise_comparison)
       if (effect_row > nrow(pairwise_comparison)) {
         stop(
           "The effect number is greater than the number of effects in the emmeans_test table once filtered by group"
         )
       }
     }
-      # effect_row <- which(
-      #   pairwise_comparison$group1 == effect[1] &
-      #     pairwise_comparison$group2 == effect[2]
-      # )
-
-      # if (length(effect_row) == 0) {
-      #   effect_row <- which(
-      #     pairwise_comparison$group1 == effect[2] &
-      #       pairwise_comparison$group2 == effect[1]
-      #   )
-
-      #   if (length(effect_row) == 0) {
-      #     stop(
-      #       "The pair of effects are not in the emmeans_test table once filtered by group"
-      #     )
-      #   }
-      # }
-    # }
   }
 
   if (!is.logical(effect_size)) {
