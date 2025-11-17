@@ -1,5 +1,7 @@
 # statsreportr (development version)
 
+* `report_pc()` now supports the `group` argument to specify grouping variables to filter the pairwise comparisons.
+
 # statsreportr 0.0.0.9006
 
 * `report_pc()` now takes into consideration the order of named `effect` argument to determine the direction of the effect size in the output.
