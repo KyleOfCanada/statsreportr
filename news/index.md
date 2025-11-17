@@ -2,6 +2,10 @@
 
 ## statsreportr (development version)
 
+- [`report_pc()`](https://kyleofcanada.github.io/statsreportr/reference/report_pc.md)
+  now supports the `group` argument to specify grouping variables to
+  filter the pairwise comparisons.
+
 ## statsreportr 0.0.0.9006
 
 - [`report_pc()`](https://kyleofcanada.github.io/statsreportr/reference/report_pc.md)
