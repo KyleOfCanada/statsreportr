@@ -13,11 +13,11 @@ format_p <- function(p_value, digits = 3) {
   stopifnot(is.numeric(p_value), length(p_value) == 1)
 
   dplyr::case_when(
-    p_value > .1 ~ stringr::str_c("= ", round(p_value, digits)),
-    p_value > .05 ~ stringr::str_c("= ", round(p_value, digits)),
-    p_value > .01 ~ stringr::str_c("= ", round(p_value, digits + 1)),
-    p_value > .001 ~ stringr::str_c("= ", round(p_value, digits + 2)),
-    p_value > .0001 ~ "< 0.001",
+    p_value > 0.1 ~ stringr::str_c("= ", round(p_value, digits)),
+    p_value > 0.05 ~ stringr::str_c("= ", round(p_value, digits)),
+    p_value > 0.01 ~ stringr::str_c("= ", round(p_value, digits + 1)),
+    p_value > 0.001 ~ stringr::str_c("= ", round(p_value, digits + 2)),
+    p_value > 0.0001 ~ "< 0.001",
     TRUE ~ "< 0.0001",
   )
 }

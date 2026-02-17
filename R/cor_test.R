@@ -203,10 +203,10 @@ as_tidy_stat <- function(x, round.p = TRUE, digits = 3, stat.method = NULL) {
     alternative <- p <- parameter <- .data <- NULL
   res <- broom::tidy(x)
   if (!is.null(stat.method)) {
-    res |> dplyr::mutate(method = stat.method) -> res
+    res <- res |> dplyr::mutate(method = stat.method)
   } else if ("method" %in% colnames(res)) {
     stat.method <- get_stat_method(x)
-    res |> dplyr::mutate(method = stat.method) -> res
+    res <- res |> dplyr::mutate(method = stat.method)
   }
   if ("p.value" %in% colnames(res)) {
     res <- res |>
