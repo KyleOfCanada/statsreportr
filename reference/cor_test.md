@@ -114,8 +114,8 @@ return a data frame with the following columns:
 
 ## See also
 
-[`cor_mat()`](https://rdrr.io/pkg/rstatix/man/cor_mat.html),
-[`as_cor_mat()`](https://rdrr.io/pkg/rstatix/man/as_cor_mat.html)
+[`cor_mat()`](https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html),
+[`as_cor_mat()`](https://rpkgs.datanovia.com/rstatix/reference/as_cor_mat.html)
 
 ## Examples
 

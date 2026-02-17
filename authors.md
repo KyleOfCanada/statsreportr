@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/KyleOfCanada/statsreportr/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/KyleOfCanada/statsreportr/blob/v0.0.0.9007/inst/CITATION)
 
 Roddick KM (2025). *statsreportr: Easy stats reports inline*. R package
 in development.
