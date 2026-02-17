@@ -34,7 +34,7 @@
   of correlation tests.
   [`cor_test()`](https://kyleofcanada.github.io/statsreportr/reference/cor_test.md)
   is modified version of
-  [`rstatix::cor_test()`](https://rpkgs.datanovia.com/rstatix/reference/cor_test.html)
+  [`rstatix::cor_test()`](https://rdrr.io/pkg/rstatix/man/cor_test.html)
   that will save the degrees of freedom of a Pearson correlation in the
   output, and
   [`report_cor()`](https://kyleofcanada.github.io/statsreportr/reference/report_cor.md)
@@ -46,7 +46,7 @@
   added to the package. This function is used to report the results of a
   pairwise comparison test. It is designed to be used in conjunction
   with the function
-  [`emmeans_test()`](https://rpkgs.datanovia.com/rstatix/reference/emmeans_test.html)
+  [`emmeans_test()`](https://rdrr.io/pkg/rstatix/man/emmeans_test.html)
   from the ‘rstatix’ R package, and to be used in inline r code within R
   Markdown and Quarto documents.
 
@@ -68,15 +68,14 @@
   added to the package. These functions are used to report the results
   of ANOVA and t-tests, respectively. They are designed to be used in
   conjunction with the functions
-  [`anova_test()`](https://rpkgs.datanovia.com/rstatix/reference/anova_test.html)
-  and
-  [`t_test()`](https://rpkgs.datanovia.com/rstatix/reference/t_test.html)
-  from the ‘rstatix’ R package, and to be used in inline r code within R
-  Markdown and Quarto documents.
+  [`anova_test()`](https://rdrr.io/pkg/rstatix/man/anova_test.html) and
+  [`t_test()`](https://rdrr.io/pkg/rstatix/man/t_test.html) from the
+  ‘rstatix’ R package, and to be used in inline r code within R Markdown
+  and Quarto documents.
   [`report_anova()`](https://kyleofcanada.github.io/statsreportr/reference/report_anova.md)
   also works with [`aov()`](https://rdrr.io/r/stats/aov.html) objects by
   running
-  [`rstatix::anova_summary()`](https://rpkgs.datanovia.com/rstatix/reference/anova_summary.html)
+  [`rstatix::anova_summary()`](https://rdrr.io/pkg/rstatix/man/anova_summary.html)
   on the object before reporting the results.
 
 - [`format_p()`](https://kyleofcanada.github.io/statsreportr/reference/format_p.md)
